@@ -1,5 +1,12 @@
 local mapkey = require("util.keymapper").mapkey
 
+-- Save buffer
+mapkey("<leader>w", "w!", "n")
+
+-- Exit vim
+mapkey("<leader>q", "q", "n")
+mapkey("<leader>Q", "qa", "n")
+
 -- Buffer Navigation
 mapkey("<leader>bn", "bnext", "n") -- Next buffer
 mapkey("<leader>bp", "bprevious", "n") -- Prev buffer
