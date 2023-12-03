@@ -1,4 +1,27 @@
 local mapkey = require("util.keymapper").mapkey
+local myNext = require("util.function").MyNext
+local myPrev = require("util.function").MyPrev
+
+vim.api.nvim_set_keymap("n", "<Tab>", "<cmd>lua MyNext()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<S-Tab>", "<cmd>lua MyPrev()<CR>", { noremap = true, silent = true })
+
+-- Normal mode mappings
+vim.api.nvim_set_keymap("n", "<A-j>", [[:m .+1<CR>==]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<A-k>", [[:m .-2<CR>==]], { noremap = true, silent = true })
+
+-- Insert mode mappings
+vim.api.nvim_set_keymap("i", "<A-j>", [[<Esc>:m .+1<CR>==gi]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap("i", "<A-k>", [[<Esc>:m .-2<CR>==gi]], { noremap = true, silent = true })
+
+-- Visual mode mappings
+vim.api.nvim_set_keymap("x", "<A-j>", [[:m '>+1<CR>gv=gv]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap("x", "<A-k>", [[:m '<-2<CR>gv=gv]], { noremap = true, silent = true })
+
+-- Vmap for maintaining Visual Mode after shifting to the left (<)
+vim.api.nvim_set_keymap("x", "<", "<gv", { noremap = true, silent = true })
+
+-- Vmap for maintaining Visual Mode after shifting to the right (>)
+vim.api.nvim_set_keymap("x", ">", ">gv", { noremap = true, silent = true })
 
 -- Save buffer
 mapkey("<leader>w", "w!", "n")
@@ -34,10 +57,6 @@ mapkey("<C-l>", "TmuxNavigateRight", "n") -- Navigate Right
 -- Window Management
 mapkey("<leader>sv", "vsplit", "n") -- Split Vertically
 mapkey("<leader>sh", "split", "n") -- Split Horizontally
-
--- Indenting
-mapkey("<", "v", "<gv") -- Shift Indentation to Left
-mapkey(">", "v", ">gv") -- Shift Indentation to Right
 
 -- Show Full File-Path
 mapkey("<leader>pa", "echo expand('%:p')", "n") -- Show Full File Path
