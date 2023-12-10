@@ -2,6 +2,14 @@ local mapkey = require("util.keymapper").mapkey
 local myNext = require("util.function").MyNext
 local myPrev = require("util.function").MyPrev
 
+-- Reload Neovim config and print message
+vim.api.nvim_set_keymap(
+	"n",
+	"<leader>r",
+	":source ~/.config/nvim/init.lua<CR>:lua << EOF\nprint('Nvim config reloaded')\nEOF<CR>",
+	{ noremap = true, silent = true }
+)
+
 vim.api.nvim_set_keymap("n", "<Tab>", "<cmd>lua MyNext()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<S-Tab>", "<cmd>lua MyPrev()<CR>", { noremap = true, silent = true })
 
@@ -55,8 +63,8 @@ mapkey("<C-k>", "TmuxNavigateUp", "n") -- Navigate Up
 mapkey("<C-l>", "TmuxNavigateRight", "n") -- Navigate Right
 
 -- Window Management
-mapkey("<leader>sv", "vsplit", "n") -- Split Vertically
-mapkey("<leader>sh", "split", "n") -- Split Horizontally
+mapkey("<leader>v", "vsplit", "n") -- Split Vertically
+mapkey("<leader>s", "split", "n") -- Split Horizontally
 
 -- Show Full File-Path
 mapkey("<leader>pa", "echo expand('%:p')", "n") -- Show Full File Path
